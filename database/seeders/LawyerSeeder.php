@@ -15,10 +15,21 @@ class LawyerSeeder extends Seeder
     {
         $lawyers = [
             [
-
+                'name' => 'Иванов Петр Сергеевич',
+                'specialization' => 'Налоговое право',
+                'experience' => 12,
             ],
-            [],
-            [],
+            [
+                'name' => 'Городов Андрей Сергеевич',
+                'specialization' => 'Налоговое право',
+                'experience' => 6,
+                'is_active' => false,
+            ],
+            [
+                'name' => 'Ворко Руслан Шагенович',
+                'specialization' => 'Арбитраж',
+                'experience' => 4,
+            ],
         ];
         foreach($lawyers as $lawyer){
             lawyer::create($lawyer);

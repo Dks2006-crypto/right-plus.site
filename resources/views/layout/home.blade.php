@@ -12,11 +12,14 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
 </head>
 <body class=" bg-slate-100">
     <div class="max-w-[1440px] gap-y-32 px-4 mx-auto grid grid-rows-[auto_1fr_auto] min-h-screen">
         @include('components.partials.header')
         @include('layout.sections.intro')
+        @include('layout.sections.advantage')
         @include('components.partials.footer')
     </div>
 

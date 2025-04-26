@@ -12,7 +12,11 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
 
 </head>
 <body class=" bg-slate-100">
@@ -21,6 +25,7 @@
         @include('layout.sections.intro')
         @include('layout.sections.advantage')
         @include('components.partials.footer')
+
     </div>
 
 </body>

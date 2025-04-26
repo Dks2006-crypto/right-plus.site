@@ -27,14 +27,12 @@
     @livewireScripts
     <script>
         document.addEventListener('livewire:initialized', () => {
-            // Закрытие по ESC
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     Livewire.dispatch('closeModal');
                 }
             });
 
-            // Закрытие мобильного меню при открытии модалки
             Livewire.on('openApplicationModal', () => {
                 const mobileMenu = document.getElementById('mobile-menu');
                 if (mobileMenu?.close) mobileMenu.close();

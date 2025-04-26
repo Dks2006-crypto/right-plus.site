@@ -1,19 +1,11 @@
 <div>
-    <!-- Кнопка открытия -->
-    <button wire:click="openModal" class="px-4 py-2 bg-blue-500 text-white rounded">
-        Записаться на консультацию
-    </button>
 
-    <!-- Модальное окно -->
     @if($isOpen)
         <div class="fixed inset-0 z-50 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen p-4">
-                <!-- Фон -->
                 <div class="fixed inset-0 bg-black bg-opacity-50" wire:click="closeModal"></div>
 
-                <!-- Контент -->
                 <div class="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-auto">
-                    <!-- Заголовок -->
                     <div class="px-6 py-4 border-b flex justify-between items-center">
                         <h3 class="text-lg font-medium">Запись на консультацию</h3>
                         <button wire:click="closeModal" class="text-gray-500 hover:text-gray-700">
@@ -21,9 +13,7 @@
                         </button>
                     </div>
 
-                    <!-- Форма -->
                     <form wire:submit.prevent="submit" class="p-6 space-y-4">
-                        <!-- Поле Имя -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Ваше имя *</label>
                             <input wire:model="form.name" type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
@@ -50,7 +40,6 @@
                             @enderror
                         </div>
 
-                        <!-- Поле Описание -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Описание проблемы *</label>
                             <textarea wire:model="form.description" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"></textarea>
@@ -59,7 +48,6 @@
                             @enderror
                         </div>
 
-                        <!-- Кнопки -->
                         <div class="flex justify-end gap-4 pt-4">
                             <button type="button" wire:click="closeModal" class="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded">
                                 Отмена
@@ -75,7 +63,6 @@
     @endif
 
     @livewireScripts
-    <!-- Уведомление об успехе -->
     @if(session('success'))
         <div x-data="{ show: true }"
              x-show="show"

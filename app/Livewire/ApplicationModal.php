@@ -8,7 +8,10 @@ use App\Models\Application;
 class ApplicationModal extends Component
 {
 
-    protected $listeners = ['openModal' => 'openModal'];
+    protected $listeners = [
+        'openApplicationModal' => 'openModal',
+        'closeModal' => 'closeModal'
+    ];
     public $isOpen = false;
     public $form = [
         'name' => '',

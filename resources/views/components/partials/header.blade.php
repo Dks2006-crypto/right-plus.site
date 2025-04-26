@@ -7,15 +7,13 @@
         <div class="hidden lg:flex flex-none">
             <ul class="menu menu-horizontal px-1 space-x-2">
                 <li>
-                    <a href="{{route('home.page')}}" class="text-[18px]">Главная</a>
+                    <a href="{{route('home.page')}}" class="lg:text-[18px] text-[16px]">Главная</a>
                 </li>
                 <li>
-                    <a href="{{route('team.index')}}" class="text-[18px]">Наша команда</a>
+                    <a href="{{route('team.index')}}" class="lg:text-[18px] text-[16px]">Наша команда</a>
                 </li>
                 <li>
-                    <button wire:click="$dispatch('openModal')" class="text-[18px]">
-                        Консультация
-                    </button>
+                    <livewire:modal-trigger />
                 </li>
             </ul>
         </div>
@@ -36,16 +34,17 @@
                     </form>
                     <ul class="menu p-4 w-full">
                         <li>
-                            <a href="{{route('home.page')}}" class="text-[18px] py-3">Главная</a>
+                            <a href="{{route('home.page')}}" class="lg:text-[18px] text-[16px] py-3">Главная</a>
                         </li>
                         <li>
-                            <a href="{{route('team.index')}}" class="text-[18px] py-3">Наша команда</a>
+                            <a href="{{route('team.index')}}" class="lg:text-[18px] text-[16px] py-3">Наша команда</a>
                         </li>
                         <li>
-                            <button onclick="document.getElementById('mobile-menu').close()"
-                                wire:click="$dispatch('openModal')" class="text-[18px] py-3 text-left">
-                                Консультация
-                            </button>
+                            <div class="lg:hidden px-0">
+                                <button onclick="document.getElementById('mobile-menu').close()">
+                                    <livewire:modal-trigger />
+                                </button>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -60,7 +59,6 @@
 
     <script>
         document.addEventListener('livewire:initialized', () => {
-            // Закрытие мобильного меню после открытия модалки
             Livewire.on('openApplicationModal', () => {
                 document.getElementById('mobile-menu').close();
             });

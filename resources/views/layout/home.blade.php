@@ -13,13 +13,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
 
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <style>
-        [x-cloak] { display: none !important; }
-    </style>
-
 </head>
 <body class=" bg-slate-100">
+    @livewireStyles
     <div class="max-w-[1440px] gap-y-32 px-4 mx-auto grid grid-rows-[auto_1fr_auto] min-h-screen">
         @include('components.partials.header')
         @include('layout.sections.intro')
@@ -28,5 +24,22 @@
 
     </div>
 
+    @livewireScripts
+    <script>
+        document.addEventListener('livewire:initialized', () => {
+            // Закрытие по ESC
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    Livewire.dispatch('closeModal');
+                }
+            });
+
+            // Закрытие мобильного меню при открытии модалки
+            Livewire.on('openApplicationModal', () => {
+                const mobileMenu = document.getElementById('mobile-menu');
+                if (mobileMenu?.close) mobileMenu.close();
+            });
+        });
+        </script>
 </body>
 </html>

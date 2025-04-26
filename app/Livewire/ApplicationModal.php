@@ -2,45 +2,51 @@
 
 namespace App\Livewire;
 
-use App\Http\Requests\ApplicationRequest;
-use App\Models\Application;
 use Livewire\Component;
+use App\Models\Application;
 
 class ApplicationModal extends Component
 {
+
+    protected $listeners = ['openModal' => 'openModal'];
     public $isOpen = false;
-    public $name;
-    public $phone;
-    public $email;
-    public $description;
+    public $form = [
+        'name' => '',
+        'phone' => '',
+        'email' => '',
+        'description' => ''
+    ];
 
-    protected $listeners = ['openApplicationModal' => 'open'];
+    protected function rules()
+    {
+        return [
+            'form.name' => 'required|min:3|max:50',
+            'form.phone' => 'required|min:10|max:20',
+            'form.email' => 'required|email',
+            'form.description' => 'required|min:10|max:1000'
+        ];
+    }
 
-    public function open()
+    public function openModal()
     {
         $this->isOpen = true;
     }
 
-    public function close()
+    public function closeModal()
     {
         $this->isOpen = false;
-        $this->resetForm();
-    }
-
-    public function resetForm()
-    {
-        $this->reset(['name', 'phone', 'email', 'description']);
+        $this->reset('form');
         $this->resetErrorBag();
     }
 
     public function submit()
     {
-        $validated = $this->validate((new ApplicationRequest())->rules());
+        $validated = $this->validate();
 
-        Application::create($validated);
+        Application::create($validated['form']);
 
-        $this->dispatch('alert', type: 'success', message: 'Заявка отправлена!');
-        $this->close();
+        $this->closeModal();
+        session()->flash('success', 'Заявка успешно отправлена!');
     }
 
     public function render()

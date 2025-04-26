@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Livewire\Livewire;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,11 +23,8 @@ class AppServiceProvider extends ServiceProvider
 
 
 
-
+        Livewire::component('application-modal', \App\Livewire\ApplicationModal::class);
         //
-    		$this->loadViewsFrom(base_path('resources/views/website/main'), 'main');
-			
-			
 			$this->loadViewsFrom(base_path('resources/views/website/team'), 'team');
 	}
 }

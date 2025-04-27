@@ -21,7 +21,7 @@
         @include('layout.sections.intro')
         @include('layout.sections.advantage')
         @include('components.partials.footer')
-
+        <livewire:application-modal />
     </div>
 
     @livewireScripts

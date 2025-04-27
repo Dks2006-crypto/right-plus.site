@@ -7,5 +7,4 @@
     <aside>
         <p>Авторские права © 2025 - Все права защищены</p>
     </aside>
-        <livewire:application-modal />
 </footer>

@@ -19,6 +19,7 @@
         {{ $slot }}
         @include('components.partials.footer')
     </div>
+    <livewire:application-modal />
 
 
 </body>

@@ -55,8 +55,6 @@
         </div>
     </div>
 
-    <livewire:application-modal />
-
     <script>
         document.addEventListener('livewire:initialized', () => {
             Livewire.on('openApplicationModal', () => {

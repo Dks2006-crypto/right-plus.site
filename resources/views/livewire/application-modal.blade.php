@@ -25,7 +25,13 @@
                         <!-- Поле Телефон -->
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Телефон *</label>
-                            <input wire:model="form.phone" type="tel" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
+                            <input
+                                    type="tel"
+                                    id="phone"
+                                    wire:model.lazy="form.phone"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                                    oninput="formatPhone(this)"
+                                >
                             @error('form.phone')
                                 <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -73,4 +79,30 @@
     @endif
 </div>
 
+<script>
+    function formatPhone(input) {
+        // Оставляем только цифры
+        let numbers = input.value.replace(/\D/g, '');
+        let result = '+7 (';
 
+        if (numbers.length > 1) {
+            numbers = numbers.substring(1);
+        }
+
+        // Форматируем номер
+        if (numbers.length > 0) {
+            result += numbers.substring(0, 3);
+        }
+        if (numbers.length > 3) {
+            result += ') ' + numbers.substring(3, 6);
+        }
+        if (numbers.length > 6) {
+            result += '-' + numbers.substring(6, 8);
+        }
+        if (numbers.length > 8) {
+            result += '-' + numbers.substring(8, 10);
+        }
+
+        input.value = result;
+    }
+    </script>

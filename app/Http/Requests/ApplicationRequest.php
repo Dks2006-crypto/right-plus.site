@@ -23,7 +23,7 @@ class ApplicationRequest extends FormRequest
     {
         return [
             'form.name' => 'required|string|max:255|',
-            'form.phone' => 'required|string|max:20',
+            'form.phone' => 'required|string|max:20|regex:/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/',
             'form.email' => 'required|email|max:255',
             'form.description' => 'required|string',
         ];

@@ -37,6 +37,7 @@ class ApplicationModal extends Component
             $request->messages()
         );
 
+        $validated['form']['phone'] = preg_replace('/\D/', '', $validated['form']['phone']);
 
         Application::create($validated['form']);
 

@@ -50,11 +50,23 @@ class LawyerResource extends Resource
                     ->label('Фото юриста')
                     ->directory('lawyers')
                     ->image()
+                    ->disk('public')
+                    ->visibility('public')
+                    ->panelLayout('integrated')
                     ->imageEditor(),
                 RichEditor::make('biography')
                     ->label('Биография юриста'),
                 Toggle::make('is_active')
                     ->label('Работающий юрист'),
+                TextInput::make('education')
+                    ->label('Образование'),
+                FileUpload::make('certificates')
+                    ->label('Сертификаты')
+                    ->acceptedFileTypes(['application/pdf'])
+                    ->multiple()
+                    ->directory('lawyers/certificates')
+                    ->downloadable()
+                    ->openable(),
             ]);
     }
 
@@ -68,8 +80,11 @@ class LawyerResource extends Resource
                     ->label('Специализация'),
                 TextColumn::make('experience')
                     ->label('Опыт'),
+                TextColumn::make('education')
+                    ->label('Образование'),
                 ToggleColumn::make('is_active')
                     ->label('Статус'),
+
             ])
             ->filters([
                 //

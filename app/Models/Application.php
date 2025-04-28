@@ -15,4 +15,8 @@ class Application extends Model
         'description',
         'status'
     ];
+
+    public function lawyer(){
+        return $this->belongsTo(lawyer::class);
+    }
 }

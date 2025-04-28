@@ -18,7 +18,7 @@ class TeamController extends Controller
 
     public function show($id)
     {
-        $lawyer = lawyer::findOrFail($id);
+        $lawyer = lawyer::where('is_active', true)->findOrFail($id);
 
         return view('team::show', compact('lawyer'));
     }

@@ -70,6 +70,10 @@ class ApplicationResource extends Resource
                 TextColumn::make('phone')
                     ->label('Телефон')
                     ->searchable(),
+                TextColumn::make('lawyer.name')
+                    ->label('Юрист')
+                    ->sortable()
+                    ->searchable(),
                 SelectColumn::make('status')
                     ->label('Статус')
                     ->options([

@@ -18,6 +18,8 @@ return new class extends Migration
             $table->integer('experience');
             $table->text('biography')->nullable();
             $table->string('photo')->nullable();
+            $table->json('certificates')->nullable();
+            $table->string('education')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
         });

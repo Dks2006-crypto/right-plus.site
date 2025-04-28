@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +13,9 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
 </head>
+
 <body class=" bg-slate-100">
     @livewireStyles
     <div class="max-w-[1440px] gap-y-32 px-4 mx-auto grid grid-rows-[auto_1fr_auto] min-h-screen">
@@ -21,8 +23,8 @@
         @include('layout.sections.intro')
         @include('layout.sections.advantage')
         @include('components.partials.footer')
-        <livewire:application-modal />
     </div>
+    <livewire:application-modal />
 
     @livewireScripts
 
@@ -42,4 +44,5 @@
 
     </script>
 </body>
+
 </html>

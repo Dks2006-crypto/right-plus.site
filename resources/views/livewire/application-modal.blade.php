@@ -3,7 +3,7 @@
     @if($isOpen)
         <div class="fixed inset-0 z-50 overflow-y-auto">
             <div class="flex items-center justify-center min-h-screen p-4">
-                <div class="fixed inset-0 bg-black bg-opacity-50" wire:click="closeModal"></div>
+                <div class="fixed inset-0 bg-black/80" wire:click="closeModal"></div>
 
                 <div class="relative bg-white rounded-lg shadow-xl w-full max-w-md mx-auto">
                     <div class="px-6 py-4 border-b flex justify-between items-center">

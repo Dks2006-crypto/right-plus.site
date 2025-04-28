@@ -1,3 +1,10 @@
+@php
+    use App\Models\Intro;
+
+    $inroTitle = Intro::latest()->first()->title;
+    $inroDescription = Intro::latest()->first()->description;
+@endphp
+
 <section aria-labelledby="intro-title" aria-describedby="intro-description"
     class="w-full h-full bg-no-repeat bg-cover bg-center "
     style="background-image: url({{ asset('images/intro-img.jpg') }})"
@@ -6,10 +13,9 @@
     <div class="grid w-full px-6 py-9 grid-cols-1 gap-4 md:grid-cols-3 pb-12 md:pb-[100px]">
         <div class="grid col-span-1 gap-y-6 md:col-span-2">
             <h1 class="font-bold text-white text-[36px] sm:text-[52px] leading-[64px] md:text-[80px] md:leading-[88px]"
-                id="intro-title">Профессиональные юридические решения для бизнеса и частных клиентов</h1>
+                id="intro-title">{{$inroTitle}}</h1>
             <div class="text-[16px] sm:text-2xl font-normal text-white">
-                <p id="intro-description">Мы гарантируем полное правовое сопровождение, защиту ваших интересов и индивидуальный подход к каждому делу.
-                    Наши юристы с опытом от 10 лет помогут разрешить даже самые сложные правовые вопросы.</p>
+                <p id="intro-description">{{$inroDescription}}</p>
             </div>
             <ul class="flex gap-4">
                 <li class="inline-flex">
@@ -30,14 +36,9 @@
     </div>
     <div class="bg-black py-[32px]">
         <div class="flex justify-evenly items-center gap-5 md:grid-cols-4 md:gap-[120px] text-white">
-            <div class="grid gap-y-[14px]">
-                <h2 class="text-5xl font-semibold">8</h2>
-                <h3 class="text-xl font-normal">Лет на рынке</h3>
-            </div>
-            <div class="grid gap-y-[14px]">
-                <h2 class="text-5xl font-semibold">1000+</h2>
-                <h3 class="text-xl font-normal">довольных клиентов</h3>
-            </div>
+            @foreach ($introCards as $introCard)
+                <x-card.intro-card :introCard="$introCard" />
+            @endforeach
         </div>
     </div>
 

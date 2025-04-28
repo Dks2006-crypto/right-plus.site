@@ -25,9 +25,8 @@ class IntroCardResource extends Resource
 
     protected static?string $pluralModelLabel ="Интро-карты";
 
-    protected static ?string $navigationLabel = "Интро";
+    protected static ?string $navigationLabel = "Интро-карты";
 
-    protected static ?string $navigationGroup = "Интро";
 
     public static function form(Form $form): Form
     {

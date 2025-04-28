@@ -25,6 +25,7 @@
     </div>
 
     @livewireScripts
+
     <script>
         document.addEventListener('livewire:initialized', () => {
             document.addEventListener('keydown', (e) => {
@@ -38,6 +39,7 @@
                 if (mobileMenu?.close) mobileMenu.close();
             });
         });
-        </script>
+
+    </script>
 </body>
 </html>

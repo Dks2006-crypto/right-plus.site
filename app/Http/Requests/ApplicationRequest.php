@@ -22,22 +22,22 @@ class ApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255|',
-            'phone' => 'required|string|max:20',
-            'email' => 'required|email|max:255',
-            'description' => 'required|string',
+            'form.name' => 'required|string|max:255|',
+            'form.phone' => 'required|string|max:20',
+            'form.email' => 'required|email|max:255',
+            'form.description' => 'required|string',
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'Поле "Имя" обязательно для заполнения',
-            'name.max' => 'Поле "Имя" не должно превышать 255 символов',
-            'phone.required' => 'Поле "Номер телофона" обязательно для заполнения',
-            'phome.max' => 'Поле "Номер телофона" не должно превышать  символов',
-            'email.required' => 'Поле "Почта" не должно превышать 255 символов',
-            'email.max' => 'Поле "Почта" не должно превышать 255 символов',
-            'description.required' => 'Поле "Описание" не должно превышать 255 символов',
+            'form.name.required' => 'Поле "Имя" обязательно для заполнения',
+            'form.name.max' => 'Поле "Имя" не должно превышать 255 символов',
+            'form.phone.required' => 'Поле "Номер телофона" обязательно для заполнения',
+            'form.phome.max' => 'Поле "Номер телофона" не должно превышать 20 символов',
+            'form.email.required' => 'Поле "Eamil" обязательно для заполнения',
+            'form.email.max' => 'Поле "Email" не должно превышать 255 символов',
+            'form.description.required' => 'Поле "Описание" обязательно для заполнения',
         ];
     }
 }

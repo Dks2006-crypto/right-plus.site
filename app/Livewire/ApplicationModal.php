@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Http\Requests\ApplicationRequest;
 use Livewire\Component;
 use App\Models\Application;
 
@@ -13,22 +14,7 @@ class ApplicationModal extends Component
         'closeModal' => 'closeModal'
     ];
     public $isOpen = false;
-    public $form = [
-        'name' => '',
-        'phone' => '',
-        'email' => '',
-        'description' => ''
-    ];
-
-    protected function rules()
-    {
-        return [
-            'form.name' => 'required|min:3|max:50',
-            'form.phone' => 'required|min:10|max:20',
-            'form.email' => 'required|email',
-            'form.description' => 'required|min:10|max:1000'
-        ];
-    }
+    public $form = [];
 
     public function openModal()
     {
@@ -44,7 +30,13 @@ class ApplicationModal extends Component
 
     public function submit()
     {
-        $validated = $this->validate();
+        $request = new ApplicationRequest();
+
+        $validated = $this->validate(
+            $request->rules(),
+            $request->messages()
+        );
+
 
         Application::create($validated['form']);
 

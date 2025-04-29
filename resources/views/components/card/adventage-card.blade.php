@@ -14,3 +14,4 @@
         {{$adventage->description}}
     </p>
 </div>
+<x-card.adventage-card :adventage='$adventage'/>

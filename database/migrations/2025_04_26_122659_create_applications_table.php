@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('description');
             $table->string('status')->default('new');
-            $table->foreignId('lawyer_id')->nullable()->constrained('lawyer');
+            $table->foreignId('lawyer_id')->nullable()->constrained('lawyers');
             $table->timestamps();
         });
     }

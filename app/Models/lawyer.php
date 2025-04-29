@@ -14,4 +14,9 @@ class lawyer extends Model
         'is_active' => 'boolean',
         'certificates' => 'array',
     ];
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
+    }
 }

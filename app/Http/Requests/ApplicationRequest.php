@@ -26,6 +26,7 @@ class ApplicationRequest extends FormRequest
             'form.phone' => 'required|string|max:20|regex:/^\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}$/',
             'form.email' => 'required|email|max:255',
             'form.description' => 'required|string',
+            'form.lawyer_id' => 'nullable|exists:lawyers,id'
         ];
     }
     public function messages()
@@ -38,6 +39,7 @@ class ApplicationRequest extends FormRequest
             'form.email.required' => 'Поле "Eamil" обязательно для заполнения',
             'form.email.max' => 'Поле "Email" не должно превышать 255 символов',
             'form.description.required' => 'Поле "Описание" обязательно для заполнения',
+            'form.lawyer_id.exists' => 'Выбранный юрист не существует',
         ];
     }
 }

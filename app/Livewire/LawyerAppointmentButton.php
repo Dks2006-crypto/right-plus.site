@@ -17,12 +17,12 @@ class LawyerAppointmentButton extends Component
     }
 
     public function openApplicationModalLawyer()
-{
-    $this->dispatch('openApplicationModalLawyer', [
-        'lawyer_id' => $this->lawyer->id,
-        'lawyer_name' => $this->lawyer->name,
-    ]);
-}
+    {
+        $this->dispatch('openApplicationModalLawyer', [
+            'lawyer_id' => $this->lawyer->id,
+            'lawyer_name' => $this->lawyer->name,
+        ])->to(ApplicationModal::class);
+    }
 
     public function render()
     {

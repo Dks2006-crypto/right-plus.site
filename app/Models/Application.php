@@ -13,7 +13,8 @@ class Application extends Model
         'phone',
         'email',
         'description',
-        'status'
+        'status',
+        'lawyer_id',
     ];
 
     public function lawyer(){

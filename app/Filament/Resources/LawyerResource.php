@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\LawyerResource\Pages;
 use App\Filament\Resources\LawyerResource\RelationManagers;
+use App\Models\Application;
 use App\Models\Lawyer;
 use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
@@ -37,36 +38,44 @@ class LawyerResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('name')
-                    ->label('Имя Юриста')
-                    ->required(),
-                TextInput::make('specialization')
-                    ->label('Специализация юриста')
-                    ->required(),
-                TextInput::make('experience')
-                    ->label('Опыт юриста')
-                    ->numeric(),
-                FileUpload::make('photo')
-                    ->label('Фото юриста')
-                    ->directory('lawyers')
-                    ->image()
-                    ->disk('public')
-                    ->visibility('public')
-                    ->panelLayout('integrated')
-                    ->imageEditor(),
-                RichEditor::make('biography')
-                    ->label('Биография юриста'),
-                Toggle::make('is_active')
-                    ->label('Работающий юрист'),
-                TextInput::make('education')
-                    ->label('Образование'),
-                FileUpload::make('certificates')
-                    ->label('Сертификаты')
-                    ->acceptedFileTypes(['application/pdf'])
-                    ->multiple()
-                    ->directory('lawyers/certificates')
-                    ->downloadable()
-                    ->openable(),
+                Forms\Components\Section::make('Основная информация')
+                    ->schema([
+                        TextInput::make('name')
+                            ->label('ФИО')
+                            ->required(),
+                        TextInput::make('specialization')
+                            ->label('Специализация')
+                            ->required(),
+                        TextInput::make('experience')
+                            ->label('Опыт работы (лет)')
+                            ->numeric()
+                            ->required(),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Дополнительно')
+                    ->schema([
+                        FileUpload::make('photo')
+                            ->label('Фото')
+                            ->directory('lawyers')
+                            ->image()
+                            ->disk('public'),
+                        Toggle::make('is_active')
+                            ->label('Активен')
+                            ->default(true),
+                    ])->columns(2),
+
+                Forms\Components\Section::make('Детали')
+                    ->schema([
+                        RichEditor::make('biography')
+                            ->label('Биография'),
+                        TextInput::make('education')
+                            ->label('Образование'),
+                        FileUpload::make('certificates')
+                            ->label('Сертификаты')
+                            ->acceptedFileTypes(['application/pdf'])
+                            ->multiple()
+                            ->directory('lawyers/certificates'),
+                    ]),
             ]);
     }
 
@@ -74,20 +83,35 @@ class LawyerResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\ImageColumn::make('photo')
+                    ->label('')
+                    ->circular(),
                 TextColumn::make('name')
-                    ->label('Имя'),
+                    ->label('ФИО')
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('specialization')
-                    ->label('Специализация'),
+                    ->label('Специализация')
+                    ->searchable(),
                 TextColumn::make('experience')
-                    ->label('Опыт'),
-                TextColumn::make('education')
-                    ->label('Образование'),
+                    ->label('Опыт')
+                    ->suffix(' лет')
+                    ->sortable(),
+                TextColumn::make('applications_count')
+                    ->label('Заявок')
+                    ->counts('applications')
+                    ->sortable(),
                 ToggleColumn::make('is_active')
                     ->label('Статус'),
 
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('is_active')
+                    ->label('Статус')
+                    ->options([
+                        true => 'Активен',
+                        false => 'Неактивен',
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -102,7 +126,7 @@ class LawyerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\ApplicationsRelationManager::class,
         ];
     }
 
@@ -113,5 +137,9 @@ class LawyerResource extends Resource
             'create' => Pages\CreateLawyer::route('/create'),
             'edit' => Pages\EditLawyer::route('/{record}/edit'),
         ];
+    }
+    public static function getNavigationBadge(): ?string
+    {
+        return Application::where('status', 'new')->count();
     }
 }

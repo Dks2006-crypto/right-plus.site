@@ -12,10 +12,11 @@
                         ✕
                     </button>
                 </div>
-                @if(session('selected_lawyer'))
-                <div class="px-6 py-2 bg-blue-50 text-blue-800 rounded mb-4">
-                    Вы записываетесь к: <strong>{{ session('selected_lawyer') }}</strong>
-                </div>
+
+                @if($selectedLawyerName)
+                    <div class="px-6 py-2 bg-blue-50 text-blue-800 rounded mb-4">
+                        Вы записываетесь к: <strong>{{ $selectedLawyerName }}</strong>
+                    </div>
                 @endif
 
                 <form wire:submit.prevent="submit" class="p-6 space-y-4">
@@ -57,6 +58,11 @@
                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    @if(isset($form['lawyer_id']))
+                        <input type="hidden" wire:model="form.lawyer_id" name="lawyer_id"
+                            value="{{ $form['lawyer_id'] ?? '' }}">
+                    @endif
 
                     <div class="flex justify-end gap-4 pt-4">
                         <button type="button" wire:click="closeModal"

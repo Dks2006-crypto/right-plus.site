@@ -17,14 +17,14 @@ class ApplicationModal extends Component
     public $isOpen = false;
     public $form = [];
 
+    public $selectedLawyerName = '';
+
     public function openModalWithLawyer($params = [])
     {
         $this->form['lawyer_id'] = $params['lawyer_id'] ?? null;
+        $this->selectedLawyerName = $params['lawyer_name'] ?? '';
         $this->isOpen = true;
 
-        if (isset($params['lawyer_name'])) {
-            session()->flash('selected_lawyer', $params['lawyer_name']);
-        }
     }
 
     public function openModal()
@@ -41,20 +41,21 @@ class ApplicationModal extends Component
 
     public function submit()
     {
-        $request = new ApplicationRequest();
-
         $validated = $this->validate(
-            $request->rules(),
-            $request->messages()
+            (new ApplicationRequest())->rules(),
+            (new ApplicationRequest())->messages()
         );
 
         $validated['form']['phone'] = preg_replace('/\D/', '', $validated['form']['phone']);
 
-        if(!isset($validated['form']['lawyer_id'])) {
-            $validated['form']['lawyer_id'] = $this->form['lawyer_id'] ?? null;
-        }
-
-        Application::create($validated['form']);
+        Application::create([
+            'name' => $validated['form']['name'],
+            'phone' => $validated['form']['phone'],
+            'email' => $validated['form']['email'],
+            'description' => $validated['form']['description'],
+            'lawyer_id' => $validated['form']['lawyer_id'] ?? null,
+            'status' => 'new'
+        ]);
 
         $this->closeModal();
         session()->flash('success', 'Заявка успешно отправлена!');

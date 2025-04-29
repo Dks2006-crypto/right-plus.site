@@ -1,3 +1,14 @@
+@php
+
+    use App\Models\Setting;
+    use App\Models\Social;
+
+    $siteName = Setting::latest()->first()->name;
+
+    $siteDesc = Setting::latest()->first()->description;
+
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +16,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+
+    <title>{{$siteName}}</title>
 
     <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>

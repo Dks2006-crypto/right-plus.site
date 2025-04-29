@@ -1,7 +1,18 @@
+@php
+
+    use App\Models\Setting;
+    use App\Models\Social;
+
+    $siteName = Setting::latest()->first()->name;
+
+    $siteDesc = Setting::latest()->first()->description;
+
+@endphp
+
 <header>
     <div class="navbar bg-base-100 shadow-sm">
         <div class="flex-1">
-            <a class="btn btn-ghost text-xl">Право+</a>
+            <a class="btn btn-ghost text-xl">{{ $siteName ?? env('APP_NAME') }}</a>
         </div>
 
         <div class="hidden lg:flex flex-none">

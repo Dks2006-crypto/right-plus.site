@@ -1,7 +1,6 @@
 @php
 
     use App\Models\Setting;
-    use App\Models\Social;
 
     $siteName = Setting::latest()->first()->name;
 

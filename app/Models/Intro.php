@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Intro extends Model
 {
-    protected $table = 'Intros';
+    protected $table = 'intros';
 
     protected $guarded = [];
 }
